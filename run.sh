@@ -5,11 +5,11 @@
 source /etc/profile
 
 function Start {
-    echo -e "Cloudflare WARP 一键流媒体解锁脚本[汉化版]"
-    echo -e "测试系统:Ubuntu 20,Debian 11"
-    echo -e "开源项目:https://github.com/GeorgeXie2333/Project-WARP-Unlock"
-    echo -e "Telegram频道:https://t.me/cutenicobest"
-    echo -e "版本:2021-09-08-1"
+    echo -e " Cloudflare WARP 一键流媒体解锁脚本[汉化版]"
+    echo -e " 测试系统:Ubuntu 20,Debian 11"
+    echo -e " 开源项目:https://github.com/GeorgeXie2333/Project-WARP-Unlock"
+    echo -e " Telegram频道:https://t.me/cutenicobest"
+    echo -e " 版本:2021-09-08-1"
     Check_System_Depandencies
 }
 
@@ -81,7 +81,7 @@ function Check_finished {
     if [[ "$routing_status" != *"172.16.0.1"* ]]; then
         echo -e " [错误] 路由配置有误，请重新检查!"
     else
-        echo -e " [信息] 已成功接入Warp,敬请享受吧!"
+        echo -e " [信息] 已成功接入Warp!"
         echo -e " [原项目作者赞助信息] USDT-TRC20:TCXfFzEQ7s968s4XiWzjNGdjuuew3CzLiF"
     fi
 }
