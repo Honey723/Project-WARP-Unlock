@@ -4,7 +4,7 @@ source /etc/profile
 
 # Variation
 Interface=wg
-Region=
+Region=us
 Hostname=
 Telegram_Token=
 Telegram_ChatID=
