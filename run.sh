@@ -5,16 +5,16 @@
 source /etc/profile
 
 function Start {
-    echo -e " [Intro] One-Click Unlock Stream Media Script By Cloudflare-WARP"
-    echo -e " [Intro] Test System:Ubuntu 20"
-    echo -e " [Intro] OpenSource-Project:https://github.com/acacia233/Project-WARP-Unlock"
-    echo -e " [Intro] Telegram Channel:https://t.me/cutenicobest"
-    echo -e " [Intro] Version:2021-09-08-1"
+    echo -e "Cloudflare WARP 一键流媒体解锁脚本[汉化版]"
+    echo -e "测试系统:Ubuntu 20,Debian 11"
+    echo -e "开源项目:https://github.com/GeorgeXie2333/Project-WARP-Unlock"
+    echo -e "Telegram频道:https://t.me/cutenicobest"
+    echo -e "版本:2021-09-08-1"
     Check_System_Depandencies
 }
 
 function Check_System_Depandencies {
-    echo -e " [Info] Installing Depandencies..."
+    echo -e " [信息] 正在安装依赖..."
     apt-get update >/dev/null
     apt-get install -yq ipset dnsmasq wireguard resolvconf mtr >/dev/null 2>&1
     Download_Profile
@@ -22,15 +22,15 @@ function Check_System_Depandencies {
 }
 
 function Download_Profile {
-    wget -qO /etc/dnsmasq.d/warp.conf https://raw.githubusercontent.com/acacia233/Project-WARP-Unlock/main/dnsmasq/warp.conf
-    wget -qO /etc/wireguard/up https://raw.githubusercontent.com/acacia233/Project-WARP-Unlock/main/scripts/up
-    wget -qO /etc/wireguard/down https://raw.githubusercontent.com/acacia233/Project-WARP-Unlock/main/scripts/down
+    wget -qO /etc/dnsmasq.d/warp.conf https://raw.githubusercontent.com/GeorgeXie2333/Project-WARP-Unlock/main/dnsmasq/warp.conf
+    wget -qO /etc/wireguard/up https://raw.githubusercontent.com/GeorgeXie2333/Project-WARP-Unlock/main/scripts/up
+    wget -qO /etc/wireguard/down https://raw.githubusercontent.com/GeorgeXie2333/Project-WARP-Unlock/main/scripts/down
     chmod +x /etc/wireguard/up
     chmod +x /etc/wireguard/down
 }
 
 function Generate_WireGuard_WARP_Profile {
-    echo -e " [Info] Generating WARP Profile,Please Wait..."
+    echo -e " [信息] 正在生成 WARP 配置文件,请稍后..."
     wget -qO /etc/wireguard/wgcf https://github.com/ViRb3/wgcf/releases/download/v2.2.8/wgcf_2.2.8_linux_amd64
     chmod +x /etc/wireguard/wgcf
     /etc/wireguard/wgcf register --accept-tos --config /etc/wireguard/wgcf-account.toml >/dev/null 2>&1
@@ -49,7 +49,7 @@ function Routing_WireGuard_WARP {
     local rt_tables_status="$(cat /etc/iproute2/rt_tables | grep warp)"
     if [[ ! -n "$rt_tables_status" ]]; then
         echo '250   warp' >>/etc/iproute2/rt_tables
-        echo -e " [Info] Creating Routing Table..."
+        echo -e " [信息] 路由创建中..."
     fi
     systemctl disable systemd-resolved --now >/dev/null 2>&1
     sleep 2
@@ -65,24 +65,24 @@ function Routing_WireGuard_WARP {
 function Check_finished {
     local wireguard_status="$(ip link | grep wg)"
     if [[ "$wireguard_status" != *"wg"* ]]; then
-        echo -e " [Error] WireGuard is not Running,Restarting..."
+        echo -e " [信息] WireGuard 未运行,尝试重启..."
         systemctl restart wg-quick@wg
     else
-        echo -e " [Info] WireGuard is Running,Check Connection..."
+        echo -e " [信息] WireGuard 运行中，正在检查连接..."
     fi
     local connection_status="$(ping 1.1.1.1 -I wg -c 1 2>&1)"
     if [[ "$connection_status" != *"unreachable"* ]] && [[ "$connection_status" != *"Unreachable"* ]] && [[ "$connection_status" != *"SO_BINDTODEVICE"* ]] && [[ "$connection_status" != *"100% packet loss"* ]]; then
-        echo -e " [Info] Connection Established..."
+        echo -e " [信息] 连接已建立..."
     else
-        echo -e " [Error] Connection Refused,Please check manually!"
+        echo -e " [错误] 连接被拒绝,请手动检查!"
         exit
     fi
     local routing_status="$(mtr -4wn -c 1 youtube.com)"
     if [[ "$routing_status" != *"172.16.0.1"* ]]; then
-        echo -e " [Error] Routing is not correct,Please check manually!"
+        echo -e " [错误] 路由配置有误，请重新检查!"
     else
-        echo -e " [Info] Routing is working normally,Enjoy~"
-        echo -e " [Sponsor] USDT-TRC20:TCXfFzEQ7s968s4XiWzjNGdjuuew3CzLiF"
+        echo -e " [信息] 已成功接入Warp,敬请享受吧!"
+        echo -e " [原项目作者赞助信息] USDT-TRC20:TCXfFzEQ7s968s4XiWzjNGdjuuew3CzLiF"
     fi
 }
 
