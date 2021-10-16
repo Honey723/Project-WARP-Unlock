@@ -12,6 +12,10 @@
 - 使用iptables为ipset中的ip打上mark，再让这些ip走特定的路由表
 - 特定的路由表中仅存在一条使用wireguard的默认路由
 
+特点：
+
+- 汉化了原版脚本，同时Warp分流规则增加了Twitter for AWS,Cygames等等
+
 
 
 一键起飞：
