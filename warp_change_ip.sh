@@ -15,14 +15,16 @@ do
     result=$(curl --user-agent "${UA_Browser}" -fsL --write-out %{http_code} --output /dev/null --max-time 10 "https://www.netflix.com/title/81215567" 2>&1)
     if [[ "$result" == "404" ]];then
         echo -e "Originals Only, Changing IP..."
-        systemctl restart wg-quick@wg
-        systemctl stop wg-quick@wg
+	wg-quick down $Interface >/dev/null 2>&1
+        sleep 2
+        wg-quick up $Interface >/dev/null 2>&1
         sleep 3
 	
     elif  [[ "$result" == "403" ]];then
         echo -e "No, Changing IP..."
-        systemctl restart wg-quick@wg
-        systemctl stop wg-quick@wg
+        wg-quick down $Interface >/dev/null 2>&1
+        sleep 2
+        wg-quick up $Interface >/dev/null 2>&1
         sleep 3
 	
     elif  [[ "$result" == "200" ]];then
@@ -32,8 +34,9 @@ do
 		fi
         if [[ "$region" != "$area" ]];then
             echo -e "Region: ${region} Not match, Changing IP..."
-            systemctl restart wg-quick@wg
-            systemctl stop wg-quick@wg
+            wg-quick down $Interface >/dev/null 2>&1
+        sleep 2
+        wg-quick up $Interface >/dev/null 2>&1
             sleep 3
         else
             echo -e "Region: ${region} Done, monitoring..."
@@ -42,7 +45,8 @@ do
 
     elif  [[ "$result" == "000" ]];then
 	echo -e "Failed, retrying..."
-        systemctl restart wg-quick@wg
-        systemctl stop wg-quick@wg
+        wg-quick down $Interface >/dev/null 2>&1
+        sleep 2
+        wg-quick up $Interface >/dev/null 2>&1
     fi
 done
