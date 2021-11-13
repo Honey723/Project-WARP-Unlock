@@ -9,7 +9,9 @@ function Start {
     echo -e " 测试系统:Ubuntu 20,Debian 11"
     echo -e " 开源项目:https://github.com/GeorgeXie2333/Project-WARP-Unlock"
     echo -e " Telegram频道:https://t.me/cutenicobest"
-    echo -e " 版本:2021-09-08-1"
+    echo -e " 版本:2021-11-03-1"
+    echo -e " 若你的服务器系统内核版本小于5.6,请按 Ctrl + C 退出..."
+    sleep 5
     Check_System_Depandencies
 }
 
