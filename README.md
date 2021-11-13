@@ -19,8 +19,13 @@
 
 
 一键起飞：
+For AMD64：
 ````
 curl -sL https://raw.githubusercontent.com/GeorgeXie2333/Project-WARP-Unlock/main/run.sh | bash
+````
+For ARM64：
+````
+curl -sL https://raw.githubusercontent.com/GeorgeXie2333/Project-WARP-Unlock/main/run_arm.sh | bash
 ````
 Warp自动换IP为NF解锁IP（修改自luoxue-bot/warp_auto_change_ip):
 ````
