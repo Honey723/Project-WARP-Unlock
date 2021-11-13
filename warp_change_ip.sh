@@ -4,24 +4,24 @@
 #Blog https://ty.al
 
 UA_Browser="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.87 Safari/537.36"
-read -r -p "Is warp installed? [y/n] " input
+read -r -p "WARP是否已安装? [y/n] " input
 if [[ "$input" == "n" ]];then
-    bash <(curl -fsSL https://github.com/luoxue-bot/warp.sh/raw/main/warp.sh) 4
+    curl -sL https://raw.githubusercontent.com/GeorgeXie2333/Project-WARP-Unlock/main/run.sh | bash
 elif [[ "$input" == "y" ]];then
-    read -r -p "Input the region you want(e.g. HK,SG):" area
+    read -r -p "请输入你需要的国家/地区代码(e.g. HK,SG):" area
 fi
 while [[ "$input" == "y" ]]
 do
     result=$(curl --user-agent "${UA_Browser}" -fsL --write-out %{http_code} --output /dev/null --max-time 10 "https://www.netflix.com/title/81215567" 2>&1)
     if [[ "$result" == "404" ]];then
-        echo -e "Originals Only, Changing IP..."
+        echo -e "检测结果:Originals Only, 正在更换IP..."
 	wg-quick down $Interface >/dev/null 2>&1
         sleep 2
         wg-quick up $Interface >/dev/null 2>&1
         sleep 3
 	
     elif  [[ "$result" == "403" ]];then
-        echo -e "No, Changing IP..."
+        echo -e "检测结果:No, 正在更换IP..."
         wg-quick down $Interface >/dev/null 2>&1
         sleep 2
         wg-quick up $Interface >/dev/null 2>&1
@@ -33,18 +33,18 @@ do
 			region="US";
 		fi
         if [[ "$region" != "$area" ]];then
-            echo -e "Region: ${region} Not match, Changing IP..."
+            echo -e "Netflix Region: ${region} 并非需要的地区, 正在更换IP..."
             wg-quick down $Interface >/dev/null 2>&1
         sleep 2
         wg-quick up $Interface >/dev/null 2>&1
             sleep 3
         else
-            echo -e "Region: ${region} Done, monitoring..."
+            echo -e "Netflix Region: ${region} 成功, 监控中..."
             sleep 6
         fi
 
     elif  [[ "$result" == "000" ]];then
-	echo -e "Failed, retrying..."
+	echo -e "失败，正在重试..."
         wg-quick down $Interface >/dev/null 2>&1
         sleep 2
         wg-quick up $Interface >/dev/null 2>&1
