@@ -35,8 +35,8 @@ do
         if [[ "$region" != "$area" ]];then
             echo -e "Netflix Region: ${region} 并非需要的地区, 正在更换IP..."
             wg-quick down $Interface >/dev/null 2>&1
-        sleep 2
-        wg-quick up $Interface >/dev/null 2>&1
+            sleep 2
+            wg-quick up $Interface >/dev/null 2>&1
             sleep 3
         else
             echo -e "Netflix Region: ${region} 成功, 监控中..."
