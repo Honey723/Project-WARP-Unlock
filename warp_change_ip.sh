@@ -15,17 +15,13 @@ do
     result=$(curl --user-agent "${UA_Browser}" -fsL --write-out %{http_code} --output /dev/null --max-time 10 "https://www.netflix.com/title/81215567" 2>&1)
     if [[ "$result" == "404" ]];then
         echo -e "检测结果:Originals Only, 正在更换IP..."
-	wg-quick down $Interface >/dev/null 2>&1
-        sleep 2
-        wg-quick up $Interface >/dev/null 2>&1
-        sleep 3
+	systemctl restart wg-quick@wg
+        sleep 5
 	
     elif  [[ "$result" == "403" ]];then
         echo -e "检测结果:No, 正在更换IP..."
-        wg-quick down $Interface >/dev/null 2>&1
-        sleep 2
-        wg-quick up $Interface >/dev/null 2>&1
-        sleep 3
+        systemctl restart wg-quick@wg
+        sleep 5
 	
     elif  [[ "$result" == "200" ]];then
 		region=`tr [:lower:] [:upper:] <<< $(curl --user-agent "${UA_Browser}" -fs --max-time 10 --write-out %{redirect_url} --output /dev/null "https://www.netflix.com/title/80018499" | cut -d '/' -f4 | cut -d '-' -f1)` ;
@@ -34,10 +30,8 @@ do
 		fi
         if [[ "$region" != "$area" ]];then
             echo -e "Netflix Region: ${region} 并非需要的地区, 正在更换IP..."
-            wg-quick down $Interface >/dev/null 2>&1
-            sleep 2
-            wg-quick up $Interface >/dev/null 2>&1
-            sleep 3
+            systemctl restart wg-quick@wg
+        sleep 5
         else
             echo -e "Netflix Region: ${region} 成功, 监控中..."
             sleep 6
@@ -45,8 +39,7 @@ do
 
     elif  [[ "$result" == "000" ]];then
 	echo -e "失败，正在重试..."
-        wg-quick down $Interface >/dev/null 2>&1
-        sleep 2
-        wg-quick up $Interface >/dev/null 2>&1
+        systemctl restart wg-quick@wg
+        sleep 5
     fi
 done
