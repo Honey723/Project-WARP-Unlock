@@ -33,8 +33,8 @@ do
             systemctl restart wg-quick@wg
         sleep 5
         else
-            echo -e "Netflix Region: ${region} 成功, 监控中..."
-            sleep 6
+            echo -e "Netflix Region: ${region} 成功, 监控中...5分钟后将再次检测"
+            sleep 300
         fi
 
     elif  [[ "$result" == "000" ]];then
