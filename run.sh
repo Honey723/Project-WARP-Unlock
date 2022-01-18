@@ -24,9 +24,9 @@ function Check_System_Depandencies {
 }
 
 function Download_Profile {
-    wget -qO /etc/dnsmasq.d/warp.conf https://raw.githubusercontent.com/GeorgeXie2333/Project-WARP-Unlock/main/dnsmasq/warp.conf
-    wget -qO /etc/wireguard/up https://raw.githubusercontent.com/GeorgeXie2333/Project-WARP-Unlock/main/scripts/up
-    wget -qO /etc/wireguard/down https://raw.githubusercontent.com/GeorgeXie2333/Project-WARP-Unlock/main/scripts/down
+    wget -qO /etc/dnsmasq.d/warp.conf https://raw.githubusercontent.com/Honey723/Project-WARP-Unlock/main/dnsmasq/warp.conf
+    wget -qO /etc/wireguard/up https://raw.githubusercontent.com/Honey723/Project-WARP-Unlock/main/scripts/up
+    wget -qO /etc/wireguard/down https://raw.githubusercontent.com/Honey723/Project-WARP-Unlock/main/scripts/down
     chmod +x /etc/wireguard/up
     chmod +x /etc/wireguard/down
 }
