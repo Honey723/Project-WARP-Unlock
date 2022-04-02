@@ -22,15 +22,15 @@
 
 For AMD64：
 ````
-curl -sL https://raw.githubusercontent.com/GeorgeXie2333/Project-WARP-Unlock/main/run.sh | bash
+curl -sL https://raw.githubusercontent.com/Honey723/Project-WARP-Unlock/main/run.sh | bash
 ````
 For ARM64：
 ````
-curl -sL https://raw.githubusercontent.com/GeorgeXie2333/Project-WARP-Unlock/main/run_arm.sh | bash
+curl -sL https://raw.githubusercontent.com/Honey723/Project-WARP-Unlock/main/run_arm.sh | bash
 ````
 Warp自动换IP为NF解锁IP（修改自luoxue-bot/warp_auto_change_ip):
 ````
-wget https://github.com/GeorgeXie2333/Project-WARP-Unlock/raw/main/warp_change_ip.sh && chmod +x warp_change_ip.sh && ./warp_change_ip.sh
+wget https://github.com/Honey723/Project-WARP-Unlock/raw/main/warp_change_ip.sh && chmod +x warp_change_ip.sh && ./warp_change_ip.sh
 ````
 如果遇到解决不了的问题，欢迎加入Telegram频道：@cutenicobest 探讨
 
